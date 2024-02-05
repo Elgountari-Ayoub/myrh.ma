@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { JobOffer } from 'src/app/models/JobOffer';
 import { Resume } from 'src/app/models/Resume';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -15,7 +15,7 @@ import { ResumeService } from 'src/app/services/resume.service';
 export class UserComponent implements OnInit {
   jobOffers: JobOffer[] = [];
   resumes: Resume[] = [];
-  auth?: AuthUser | null;
+  auth?: Auth | null;
 
   errorMessages: string[] = [];
 
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth = <AuthUser>this.authService.getAuthUser();
+    this.auth = <Auth>this.authService.getAuthUser();
     this.loadJobOffers();
   }
 

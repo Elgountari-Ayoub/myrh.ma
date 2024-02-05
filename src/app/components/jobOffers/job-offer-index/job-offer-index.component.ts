@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { JobOffer } from 'src/app/models/JobOffer';
 import { Resume } from 'src/app/models/Resume';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -15,7 +15,7 @@ import { ResumeService } from 'src/app/services/resume.service';
 })
 export class JobOfferIndexComponent implements OnInit {
   jobOffers: JobOffer[] = [];
-  authUser!: AuthUser | null;
+  authUser!: Auth | null;
 
   resumeForm: FormGroup;
   errorMessages: string[] = [];
@@ -46,7 +46,7 @@ export class JobOfferIndexComponent implements OnInit {
     }
 
     if (this.resume) {
-      this.authUser = <AuthUser>this.authService.getAuthUser();
+      this.authUser = <Auth>this.authService.getAuthUser();
 
 
       let userId = -1;

@@ -42,17 +42,6 @@ export class JobOfferCreateComponent implements OnInit {
     this.recruiterId = this.authService.getAuthUser()?.id;
     console.log(this.recruiterId);
     console.log(1);
-
-  }
-
-  onFileChange(event: any) {
-    const fileInput = event.target;
-    if (fileInput.files && fileInput.files.length > 0) {
-      const file = fileInput.files[0];
-      this.jobOfferForm.patchValue({
-        image: file,
-      });
-    }
   }
 
   onsubmit() {
@@ -71,7 +60,8 @@ export class JobOfferCreateComponent implements OnInit {
     };
 
     this.service.createJobOffer(jobOffer, this.recruiterId!).subscribe({
-      next: (jobOffer) => this.router.navigate(['/dashboard/recruiter-job-offers']),
+      next: (jobOffer) =>
+        this.router.navigate(['/dashboard/recruiter-job-offers']),
       error: (error) => {
         console.log(error);
       },

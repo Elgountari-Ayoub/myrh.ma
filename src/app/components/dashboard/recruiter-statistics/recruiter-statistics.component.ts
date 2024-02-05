@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { StatisticsDTO } from 'src/app/models/StatisticsDTO';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { JobOfferService } from 'src/app/services/job-offer.service';
@@ -12,7 +12,7 @@ import { StatisticsService } from 'src/app/services/statistics.service';
 })
 export class RecruiterStatisticsComponent implements OnInit {
   statistics?: StatisticsDTO;
-  authUser: AuthUser | null = null;
+  authUser: Auth | null = null;
 
 
 
@@ -22,7 +22,7 @@ export class RecruiterStatisticsComponent implements OnInit {
     private authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.authUser = <AuthUser>this.authService.getAuthUser();
+    this.authUser = <Auth>this.authService.getAuthUser();
     this.getStatistics();
   }
 

@@ -1,3 +1,3 @@
 export interface JwtAuthenticationResponse {
-    jwt?: string;
+    token?: string;
 }

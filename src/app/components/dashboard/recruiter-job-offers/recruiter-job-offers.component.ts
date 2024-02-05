@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { JobOffer } from 'src/app/models/JobOffer';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { JobOfferService } from 'src/app/services/job-offer.service';
@@ -12,7 +12,7 @@ import { JobOfferService } from 'src/app/services/job-offer.service';
 })
 export class RecruiterJobOffersComponent {
   jobOffers: JobOffer[] = [];
-  authUser: AuthUser | null = null;
+  authUser: Auth | null = null;
 
   constructor(
     private router: Router,
@@ -21,7 +21,7 @@ export class RecruiterJobOffersComponent {
   ) {}
 
   ngOnInit(): void {
-    this.authUser = <AuthUser> this.authService.getAuthUser();
+    this.authUser = <Auth> this.authService.getAuthUser();
     this.loadJobOffersByRecruiterId();
     // this.loadJobOffers();
     

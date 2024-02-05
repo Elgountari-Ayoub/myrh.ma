@@ -19,7 +19,7 @@ export class ValidationComponent implements OnInit {
     private router: Router,
     private authService: AuthenticationService
   ) { }
-
+    
   code: string = '';
 
   logCode() {

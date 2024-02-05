@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { Recruiter } from 'src/app/models/Recruiter';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
@@ -9,10 +9,10 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  authUser?: AuthUser | null;
+  authUser?: Auth | null;
   constructor(private authService: AuthenticationService){}
   ngOnInit(): void {
-    this.authUser = <AuthUser> this.authService.getAuthUser();
+    this.authUser = <Auth> this.authService.getAuthUser();
     
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { JobOffer } from '../models/JobOffer';
 import { Resume } from '../models/Resume';
-import { JwtService } from './jwt.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,17 +11,14 @@ import { JwtService } from './jwt.service';
 export class ResumeService {
   private baseUrl = 'http://localhost:8080/api/v1/resumes';
 
-  constructor(private http: HttpClient, private jwtService: JwtService) { }
+  constructor(private http: HttpClient, private authService: AuthenticationService) { }
 
   create(formData: FormData, id: number): Observable<Resume> {
-    const requestOptions = {
-      headers: this.loadHeaders()
-    };
     return this.http.post<Resume>(`${this.baseUrl}/${id}`, formData);
   }
   updateStatus(newStatus: string, id: number): Observable<Resume> {
     const requestOptions = {
-      headers: this.loadHeaders()
+      headers: this.getHeaders()
     };
     return this.http.post<Resume>(`${this.baseUrl}/${id}/${newStatus}`, {});
   }
@@ -37,10 +34,10 @@ export class ResumeService {
   //   return this.http.get<Resume[]>(`${this.baseUrl}`);
   // }
 
-  loadHeaders(): HttpHeaders {
+  getHeaders(): HttpHeaders {
     let token: string | null = '';
-    if (this.jwtService.getAuthToken() != null) {
-      token = this.jwtService.getAuthToken();
+    if (this.authService.getAuthToken() != null) {
+      token = this.authService.getAuthToken();
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,

@@ -1,26 +1,31 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { JwtService } from './jwt.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatisticsService {
-
   private baseUrl = 'http://localhost:8080/api/v1/recruiters';
-  constructor(private http: HttpClient, private jwtService: JwtService) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthenticationService
+  ) {}
   getStatistics(id: number): Observable<any> {
     const requestOptions = {
-      headers: this.loadHeaders()
+      headers: this.authService.getHeaders(),
     };
-    return this.http.get<any>(`${this.baseUrl}/statistics/${id}`, requestOptions);
+    return this.http.get<any>(
+      `${this.baseUrl}/statistics/${id}`,
+      requestOptions
+    );
   }
 
-  loadHeaders(): HttpHeaders {
+  getHeaders(): HttpHeaders {
     let token: string | null = '';
-    if (this.jwtService.getAuthToken() != null) {
-      token = this.jwtService.getAuthToken();
+    if (this.authService.getAuthToken() != null) {
+      token = this.authService.getAuthToken();
     }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -28,5 +33,4 @@ export class StatisticsService {
     });
     return headers;
   }
-
 }

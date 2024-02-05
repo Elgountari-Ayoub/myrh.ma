@@ -17,9 +17,7 @@ import { DashNavbarComponent } from './components/includes/dash-navbar/dash-navb
 import { RecruiterJobOffersComponent } from './components/dashboard/recruiter-job-offers/recruiter-job-offers.component';
 import { RecruiterSubmissionsComponent } from './components/dashboard/recruiter-submissions/recruiter-submissions.component';
 import { ValidationComponent } from './components/validation/validation.component';
-import { ChatComponent } from './components/chat/chat.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import { CondidateIndexComponent } from './components/condidate/condidate-index/condidate-index.component';
 import { RecruiterCreateComponent } from './components/recruiter/recruiter-create/recruiter-create.component';
 import { UserComponent } from './components/user/user.component';
 import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-statistics/recruiter-statistics.component';
@@ -40,9 +38,7 @@ import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-s
     RecruiterJobOffersComponent,
     RecruiterSubmissionsComponent,
     ValidationComponent,
-    ChatComponent,
     SignupComponent,
-    CondidateIndexComponent,
     RecruiterCreateComponent,
     UserComponent,
     RecruiterStatisticsComponent

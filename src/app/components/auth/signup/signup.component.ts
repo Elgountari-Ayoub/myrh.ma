@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import Swal from 'sweetalert2';
-import { JwtService } from 'src/app/services/jwt.service';
-import { AuthUser } from 'src/app/models/AuthUser';
+import { Auth } from 'src/app/models/Auth';
 import { ClientDTO } from 'src/app/models/ClientDTO';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 
@@ -21,7 +20,7 @@ export class SignupComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private jwtService: JwtService,
+    private jwtService: AuthenticationService,
     private webSocketService: WebSocketService,
     private router: Router
   ) {
@@ -34,31 +33,28 @@ export class SignupComponent {
   }
 
   signUp() {
-    this.errorMessages = [];
-
     const signUpFormValue = { ...this.signUpForm.value };
     this.authService.signUp(signUpFormValue).subscribe({
-      next: (jwtToken) => {
-        localStorage.setItem('token', JSON.stringify(jwtToken));
-        this.jwtService.loadTokenFromStorage();
+      next: (response) => {
+        if (response.token) {
+          this.authService.setAuthToken(response.token);
+          this.webSocketService.connect().then(() => {
+            const auth = this.authService.getAuthUser();
+            const clientDTO: ClientDTO = {
+              clientId: auth?.id,
+            };
+            this.webSocketService.addUser(clientDTO).subscribe(
+              () => {
+                console.log('User added successfully');
+              },
+              (error) => {
+                console.error('Error adding user:', error);
+              }
+            );
+          });
 
-        this.webSocketService.connect().then(() => {
-          const authUser = <AuthUser>this.authService.getAuthUser();
-          const clientDTO: ClientDTO = {
-            clientId: authUser.id,
-          };
-          this.webSocketService.addUser(clientDTO).subscribe(
-            () => {
-              console.log('User added successfully');
-              
-            },
-            (error) => {
-              console.error('Error adding user:', error);
-            }
-          );
-        });
-        
-        this.router.navigate(['/']);
+          this.router.navigate(['/']);
+        }
       },
       error: (error) => {
         Swal.fire({
@@ -71,6 +67,4 @@ export class SignupComponent {
       },
     });
   }
-
-  errorMessagesMapping: { [key: string]: string } = {};
 }
