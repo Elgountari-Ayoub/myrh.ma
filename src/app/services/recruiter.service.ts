@@ -15,26 +15,19 @@ export class RecruiterService {
 
   create(recruiter: Recruiter): Observable<JwtAuthenticationResponse> {
     const formData = new FormData();
-      formData.append('id', `${recruiter.id}`);
-      formData.append('email', recruiter.email!);
-      formData.append('password', recruiter.password!);
-      formData.append('login', recruiter.login!);
-      formData.append('name', recruiter.name!);
-      formData.append('phone', recruiter.phone!);
-      formData.append('address', recruiter.address!);
-      formData.append('image', recruiter.image!);
-      formData.append('role', recruiter.role!);
+    formData.append('id', `${recruiter.id}`);
+    formData.append('email', recruiter.email!);
+    formData.append('password', recruiter.password!);
+    formData.append('login', recruiter.login!);
+    formData.append('name', recruiter.name!);
+    formData.append('phone', recruiter.phone!);
+    formData.append('address', recruiter.address!);
+    formData.append('image', recruiter.image!);
+    formData.append('role', recruiter.role!);
 
-    let token: string | null = '';
-    if (this.authService.getAuthToken() != null) {
-      token = this.authService.getAuthToken();
-    }
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    console.log(headers.get('Authorization'));
+    console.log(this.authService.getHeader('Authorization'));
 
-    return this.http.post<JwtAuthenticationResponse>(`${this.baseUrl}`, formData, { headers: this.authService.getHeaders() });
+    return this.http.post<JwtAuthenticationResponse>(`${this.baseUrl}`, formData,  {headers: this.authService.getHeader('Authorization')});
   }
 
   getById(id: number): Observable<Recruiter> {
@@ -46,16 +39,13 @@ export class RecruiterService {
     code?: string
   ): Observable<boolean> {
 
-    let token: string | null = '';
-    if (this.authService.getAuthToken() != null) {
-      token = this.authService.getAuthToken();
-    }
+    const authorizationHeaderValue = this.authService.getHeaders().get('Authorization');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      Authorization: authorizationHeaderValue !== null ? authorizationHeaderValue : '',
     });
 
     const url = `${this.baseUrl}/${id}/${code}/validation`;
-    return this.http.post<boolean>(url, {}, { headers });
+    return this.http.post<boolean>(url, {}, {headers: this.authService.getHeader('Authorization')});
   }
 
 

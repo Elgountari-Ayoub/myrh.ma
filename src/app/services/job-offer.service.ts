@@ -1,7 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { PaginationModel } from '../models/PaginationModel';
 import { JobOffer } from '../models/JobOffer';
 import { AuthenticationService } from './authentication.service';
 @Injectable({

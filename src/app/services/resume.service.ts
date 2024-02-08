@@ -11,15 +11,19 @@ import { AuthenticationService } from './authentication.service';
 export class ResumeService {
   private baseUrl = 'http://localhost:8080/api/v1/resumes';
 
-  constructor(private http: HttpClient, private authService: AuthenticationService) { }
+  private headers: HttpHeaders = new HttpHeaders();
+
+  constructor(
+    private http: HttpClient,
+    private authService: AuthenticationService
+  ) {
+    this.headers = this.authService.getHeaders();
+  }
 
   create(formData: FormData, id: number): Observable<Resume> {
     return this.http.post<Resume>(`${this.baseUrl}/${id}`, formData);
   }
   updateStatus(newStatus: string, id: number): Observable<Resume> {
-    const requestOptions = {
-      headers: this.getHeaders()
-    };
     return this.http.post<Resume>(`${this.baseUrl}/${id}/${newStatus}`, {});
   }
 
@@ -28,22 +32,5 @@ export class ResumeService {
   }
   getAllResumeByUser(userId: number): Observable<Resume[]> {
     return this.http.get<Resume[]>(`${this.baseUrl}/byUser/${userId}`)
-  }
-  
-  // getAllResumeByJobOffer(recruiterId?: number): Observable<Resume[]> {
-  //   return this.http.get<Resume[]>(`${this.baseUrl}`);
-  // }
-
-  getHeaders(): HttpHeaders {
-    let token: string | null = '';
-    if (this.authService.getAuthToken() != null) {
-      token = this.authService.getAuthToken();
-    }
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    });
-    // alert(headers.get('Authorization'))
-    return headers;
   }
 }
