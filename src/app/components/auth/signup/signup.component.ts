@@ -1,28 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import Swal from 'sweetalert2';
 import { Auth } from 'src/app/models/Auth';
 import { ClientDTO } from 'src/app/models/ClientDTO';
 import { WebSocketService } from 'src/app/services/web-socket.service';
+import { MyHttpService } from 'src/app/services/my-http.service';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignupComponent {
-  ngOnInit(): void {}
+export class SignupComponent implements OnInit{
+  url : String = "" 
+
+  ngOnInit(): void {
+    this.signInWithOauth();
+    this.getToken();
+
+    }
 
   signUpForm: FormGroup;
   errorMessages: string[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private jwtService: AuthenticationService,
     private webSocketService: WebSocketService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private http: MyHttpService
   ) {
     this.signUpForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.pattern(/\S+/)]],
@@ -66,5 +74,32 @@ export class SignupComponent {
         console.log(error.error);
       },
     });
+  }
+
+  async signInWithOauth(){
+  
+    this.http.get("auth/url").subscribe((data : any)=> {
+      console.log(data)
+      this.url = data.url 
+      console.log(this.url);
+    });
+  }
+
+  getToken() {
+    this.route.queryParams.subscribe((params: any)  => {
+      console.log(this.route);
+      console.log(params["code"]);
+      
+      if(params["code"] !== undefined){
+
+        console.log(params["code"]);
+            this.http.getToken(params["code"]).subscribe((result : any) => {
+              console.log(result);
+              console.log("resulttttttttttttttttttt");
+              this.authService.setAuthToken(result);
+              // localStorage.setItem('token', result);
+            })
+      }
+    })
   }
 }

@@ -41,14 +41,14 @@
               Name is required.
             </div>
             <div
-            *ngIf="
-              signUpForm.get('name')?.hasError('pattern') &&
-              signUpForm.get('name')?.touched
-            "
-            class="text-gray-100 p-1 bg-red-500 text-xs mt-1 rounded"
-          >
-            Name cannot be blank.
-          </div>
+              *ngIf="
+                signUpForm.get('name')?.hasError('pattern') &&
+                signUpForm.get('name')?.touched
+              "
+              class="text-gray-100 p-1 bg-red-500 text-xs mt-1 rounded"
+            >
+              Name cannot be blank.
+            </div>
           </div>
 
           <!-- Email -->
@@ -122,15 +122,20 @@
             >
               Password cannot be blank.
             </div>
+            <button
+              [disabled]="signUpForm.invalid"
+              type="submit"
+              class="w-full text-black hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 my-2"
+            >
+              Sign Up
+            </button>
           </div>
-
-          <button
-            [disabled]="signUpForm.invalid"
-            type="submit"
-            class="w-full text-black hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          <a
+            class="d-block w-full text-black text-center bg-blue-200 ml-auto p-2 rounded my-2"
+            href="{{ url }}"
+            >Sign up with Google</a
           >
-            Sign Up
-          </button>
+
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
             Already have an account?
             <a

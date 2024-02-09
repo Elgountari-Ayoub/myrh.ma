@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Recruiter } from 'src/app/models/Recruiter';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { RecruiterService } from 'src/app/services/recruiter.service';
-import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-validation',

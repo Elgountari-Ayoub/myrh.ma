@@ -53,7 +53,7 @@ export class AuthenticationService {
   }
 
   setAuthToken(token: string): void {
-    window.localStorage.setItem('token', token);
+    localStorage.setItem('token', token);
   }
 
   getAuthToken(): string | null {
