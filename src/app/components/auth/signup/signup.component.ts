@@ -18,7 +18,6 @@ export class SignupComponent implements OnInit{
 
   ngOnInit(): void {
     this.signInWithOauth();
-    this.getToken();
 
     }
 
@@ -85,21 +84,4 @@ export class SignupComponent implements OnInit{
     });
   }
 
-  getToken() {
-    this.route.queryParams.subscribe((params: any)  => {
-      console.log(this.route);
-      console.log(params["code"]);
-      
-      if(params["code"] !== undefined){
-
-        console.log(params["code"]);
-            this.http.getToken(params["code"]).subscribe((result : any) => {
-              console.log(result);
-              console.log("resulttttttttttttttttttt");
-              this.authService.setAuthToken(result);
-              // localStorage.setItem('token', result);
-            })
-      }
-    })
-  }
 }

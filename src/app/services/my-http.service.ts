@@ -41,46 +41,30 @@ export class MyHttpService {
   //   return null;
   // }
 
+  private baseUrl = 'http://localhost:8080';
+  token: string = "";
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
-  
-  token : string = "" ;
-  constructor(private http : HttpClient , private route: ActivatedRoute) { }
-
-  get(url : string) {
-    return this.http.get("http://localhost:8080/"+url);
+  get(url: string) {
+    return this.http.get("http://localhost:8080/" + url);
   }
 
-  getPrivate(url : string){
+  getPrivate(url: string) {
     console.log(this.token)
-    return this.http.get("http://localhost:8080/"+url , 
-    {headers: new HttpHeaders({"Authorization" : "Baerer " + this.token})});
+    return this.http.get("http://localhost:8080/" + url,
+      { headers: new HttpHeaders({ "Authorization": "Baerer " + this.token }) });
   }
 
-  // getToken(code : string) {
-  //   return this.http.get("http://localhost:8080/auth/callback?code="+code).subscribe(res=>{
-  //     return res ;
-      
-  //   })
 
-  // }
-
-  getToken(code : string) : Observable<any> {
-    console.log(this.http.get("http://localhost:8080/auth/callback?code=" + code))
-    return this.http.get("http://localhost:8080/auth/callback?code=" + code);
+  getToken(code: string): Observable<string> {
+    const url = `${this.baseUrl}/auth/callback?code=${code}`;
+    const requestOptions = {
+      responseType: 'text' as 'json',
+    };
+    return this.http.get<string>(url, requestOptions);
   }
-  // getToken(code: string) : Observable<string> {
-  //   return this.http.get<Observable<string>>("http://localhost:8080/auth/callback?code=" + code )
-  //     .subscribe((response : any) => {
-  //           console.log(response);
-  //           alert(response);
-  //           debugger
-  //           return response;
-  //       })
-  //     ;
-  // }
-
-  getUserInfo(token : string) {
-    return this.http.get("http://localhost:8080/auth/userInfo?id_token="+token).subscribe(res=>{
+  getUserInfo(token: string) {
+    return this.http.get("http://localhost:8080/auth/userInfo?id_token=" + token).subscribe(res => {
       console.log(res);
     })
   }
