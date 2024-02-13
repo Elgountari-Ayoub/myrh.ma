@@ -24,8 +24,11 @@ export class RecruiterService {
     formData.append('address', recruiter.address!);
     formData.append('image', recruiter.image!);
     formData.append('role', recruiter.role!);
+    console.log('this.authService.getAuthUser()::' + this.authService.getAuthUser());
+    console.log('this.authService.getAuthToken()::'+this.authService.getAuthToken());
 
-    console.log(this.authService.getHeader('Authorization'));
+    console.log("this.authService.getHeader('Authorization')::"+this.authService.getHeader('Authorization'));
+    console.log("this.authService.getHeaders().get('Authorization')::"+this.authService.getHeaders().get('Authorization'));
 
     return this.http.post<JwtAuthenticationResponse>(`${this.baseUrl}`, formData,  {headers: this.authService.getHeader('Authorization')});
   }

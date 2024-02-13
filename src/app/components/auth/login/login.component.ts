@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { ClientDTO } from 'src/app/models/ClientDTO';
 import { Auth } from 'src/app/models/Auth';
+import { MyHttpService } from 'src/app/services/my-http.service';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +14,18 @@ import { Auth } from 'src/app/models/Auth';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.signInWithOauth();
+  }
 
   signInForm: FormGroup;
   errorMessages: string[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthenticationService,
-    private jwtService: AuthenticationService,
     private router: Router,
-    private webSocketService: WebSocketService
+    private webSocketService: WebSocketService,
+    private http: MyHttpService
   ) {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
@@ -76,6 +79,17 @@ export class LoginComponent implements OnInit {
           footer: error,
         });
       },
+    });
+  }
+
+
+  url : String = "";
+  async signInWithOauth(){
+  
+    this.http.get("auth/url").subscribe((data : any)=> {
+      console.log(data)
+      this.url = data.url 
+      console.log(this.url);
     });
   }
 }

@@ -130,22 +130,21 @@
               Sign Up
             </button>
           </div>
-          <a
-            class="d-block w-full text-black text-center bg-blue-200 ml-auto p-2 rounded my-2"
-            href="{{ url }}"
-            >Sign up with Google</a
-          >
-
-          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Already have an account?
-            <a
-              routerLink="/login"
-              href="#"
-              class="font-medium text-black hover:underline dark:text-primary-500"
-              >Login here</a
-            >
-          </p>
         </form>
+        <p class="flex justify-center ">
+          <a class="d-block text-black text-center border-blue-600 border  p-4 py-2 rounded" href="{{ url }}"><img
+              src="../../../../assets/google.svg" class="w-8 inline-block" alt=""><span class="ml-2">Continue With Google</span></a>
+        </p>
+
+        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+          Already have an account?
+          <a
+            routerLink="/login"
+            href="#"
+            class="font-medium text-black hover:underline dark:text-primary-500"
+            >Login here</a
+          >
+        </p>
       </div>
     </div>
   </div>

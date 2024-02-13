@@ -22,6 +22,7 @@ export class AuthenticationService {
     this.headers = this.headers.set('Authorization', `Bearer ${token ? token : ''}`);
     this.headers = this.headers.append('Content-Type', 'application/json');
 
+
   }
   signUp(signUpRequest: SignUpRequest): Observable<JwtAuthenticationResponse> {
     return this.http.post<JwtAuthenticationResponse>(
@@ -54,10 +55,11 @@ export class AuthenticationService {
 
   setAuthToken(token: string): void {
     localStorage.setItem('token', token);
+    this.headers = this.headers.set('Authorization', `Bearer ${token ? token : ''}`);
   }
 
   getAuthToken(): string | null {
-    return window.localStorage.getItem('token');
+    return localStorage.getItem('token');
   }
 
   clearAuthToken(): void {
@@ -71,6 +73,7 @@ export class AuthenticationService {
     this.headers = this.headers.set(name, value);
   }
   getHeader(name: string): HttpHeaders {
+    this.headers.get(name)
     return new HttpHeaders().set(name, this.headers.get(name) || '');
   }
   deleteHeader(name: string, value: string): void {

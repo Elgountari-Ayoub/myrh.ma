@@ -35,7 +35,12 @@ export class JobOfferService {
     });
   }
 
-  getJobOffersByRecruiterId(id: number): Observable<JobOffer[]> {
+  getJobOffersByRecruiterId(id: number): Observable<JobOffer[]> {    
+    console.log(this.authService.getHeaders().get('Authorization'));
+
+    console.log("id "+ id);
+    console.log("this.headers "+ this.headers);
+    
     return this.http.get<JobOffer[]>(`${this.baseUrl}/${id}`, {
       headers: this.headers,
     });

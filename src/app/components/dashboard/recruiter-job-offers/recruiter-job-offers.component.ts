@@ -21,7 +21,9 @@ export class RecruiterJobOffersComponent {
   ) {}
 
   ngOnInit(): void {
-    this.authUser = <Auth> this.authService.getAuthUser();
+    this.authUser = this.authService.getAuthUser();
+    console.log(this.authUser);
+    
     this.loadJobOffersByRecruiterId();
     // this.loadJobOffers();
     

@@ -43,6 +43,9 @@ export class RecruiterCreateComponent implements OnInit {
 
   onsubmit() {
     this.errorMessages = [];
+    console.log(this.authService.getAuthUser());
+    console.log(this.authService.getAuthToken());
+    
     const recruiter: Recruiter = {
       id: this.authService.getAuthUser()?.id,
       login: this.recruiterForm.get('login')?.value,

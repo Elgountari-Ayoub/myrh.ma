@@ -28,7 +28,6 @@ export class SignupComponent implements OnInit{
     private authService: AuthenticationService,
     private webSocketService: WebSocketService,
     private router: Router,
-    private route: ActivatedRoute,
     private http: MyHttpService
   ) {
     this.signUpForm = this.formBuilder.group({

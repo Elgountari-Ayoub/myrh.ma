@@ -50,8 +50,22 @@ export class HomeComponent implements OnInit {
                     console.error('Error adding user:', error);
                   }
                 );
+              
+                switch (auth?.role) {
+                  case 'AGENT':
+                    this.router.navigate(['/agent-dash']);
+                    break;
+                  case 'RECRUITER':
+                    this.router.navigate(['/dashboard']);
+                    break;
+                  case 'USER':
+                    this.router.navigate(['/user-dash']);
+                    break;
+                  default: // Guest
+                    this.router.navigate(['/']);
+                }
               });
-              this.router.navigate(['/']);
+              // this.router.navigate(['/']);
             }
           }, error => {
             Swal.fire({
