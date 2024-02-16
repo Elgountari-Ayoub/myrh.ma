@@ -20,6 +20,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { RecruiterCreateComponent } from './components/recruiter/recruiter-create/recruiter-create.component';
 import { UserComponent } from './components/user/user.component';
 import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-statistics/recruiter-statistics.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-s
     SignupComponent,
     RecruiterCreateComponent,
     UserComponent,
-    RecruiterStatisticsComponent
+    RecruiterStatisticsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

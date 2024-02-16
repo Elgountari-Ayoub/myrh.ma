@@ -79,7 +79,9 @@ export class AuthenticationService {
   deleteHeader(name: string, value: string): void {
     this.headers = this.headers.delete(name, value);
   }
-
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
   getHeaders(): HttpHeaders {
     return this.headers;
   }
