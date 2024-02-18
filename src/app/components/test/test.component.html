@@ -1,0 +1,7 @@
+<div *ngIf="questions && currentIndex < questions.length">
+    <app-question [question]="questions[currentIndex]"></app-question>
+    <button (click)="nextQuestion()">Next</button>
+</div>
+<div *ngIf="currentIndex >= questions.length">
+    <h2>Test completed!</h2>
+</div>

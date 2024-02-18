@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit{
       name: ['', [Validators.required, Validators.pattern(/\S+/)]],
       email: ['', [Validators.required, Validators.pattern(/^\S+@\S+\.\S+$/)]],
       password: ['', [Validators.required, Validators.pattern(/\S+/)]],
-      role: ['USER'],
+      role: ['JOBSEEKER'],
     });
   }
 
@@ -57,6 +57,19 @@ export class SignupComponent implements OnInit{
                 console.error('Error adding user:', error);
               }
             );
+            switch (auth?.role) {
+              case 'AGENT':
+                this.router.navigate(['/agent-dash']);
+                break;
+              case 'RECRUITER':
+                this.router.navigate(['/dashboard']);
+                break;
+              case 'JOBSEEKER':
+                this.router.navigate(['/user-dash']);
+                break;
+              default: // Guest
+                this.router.navigate(['/']);
+            }
           });
 
           this.router.navigate(['/']);

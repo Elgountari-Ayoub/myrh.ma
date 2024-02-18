@@ -21,6 +21,8 @@ import { RecruiterCreateComponent } from './components/recruiter/recruiter-creat
 import { UserComponent } from './components/user/user.component';
 import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-statistics/recruiter-statistics.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { QuestionComponent } from './components/question/question.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     RecruiterCreateComponent,
     UserComponent,
     RecruiterStatisticsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    QuestionComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

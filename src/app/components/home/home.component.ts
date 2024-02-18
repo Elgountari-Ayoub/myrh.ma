@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
                   case 'RECRUITER':
                     this.router.navigate(['/dashboard']);
                     break;
-                  case 'USER':
+                  case 'JOBSEEKER':
                     this.router.navigate(['/user-dash']);
                     break;
                   default: // Guest

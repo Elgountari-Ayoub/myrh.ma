@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Auth } from 'src/app/models/Auth';
 import { Recruiter } from 'src/app/models/Recruiter';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { RecruiterService } from 'src/app/services/recruiter.service';
@@ -12,7 +13,10 @@ import { RecruiterService } from 'src/app/services/recruiter.service';
   styleUrls: ['./recruiter-create.component.css'],
 })
 export class RecruiterCreateComponent implements OnInit {
-  ngOnInit(): void {}
+  auth: Auth | null = null;
+  ngOnInit(): void {
+    this.auth = this.authService.getAuthUser();
+  }
 
   recruiterForm: FormGroup;
   errorMessages: string[] = [];
@@ -45,9 +49,11 @@ export class RecruiterCreateComponent implements OnInit {
     this.errorMessages = [];
     console.log(this.authService.getAuthUser());
     console.log(this.authService.getAuthToken());
-    
+
     const recruiter: Recruiter = {
-      id: this.authService.getAuthUser()?.id,
+      id: this.auth?.id,
+      name:this.auth?.name,
+      email:this.auth?.email,
       login: this.recruiterForm.get('login')?.value,
       address: this.recruiterForm.get('address')?.value,
       phone: this.recruiterForm.get('phone')?.value,
