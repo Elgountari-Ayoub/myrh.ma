@@ -16,8 +16,11 @@ import { UserComponent } from './components/user/user.component';
 import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-statistics/recruiter-statistics.component';
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
+  { path: 'test', component: TestComponent },
+
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent },

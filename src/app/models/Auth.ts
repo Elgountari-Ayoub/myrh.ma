@@ -1,3 +1,5 @@
+import { Profile } from "./Profile";
+
 export interface Auth {
   id?: number | null;
   name?: string | null;
@@ -10,4 +12,6 @@ export interface Auth {
   imageUrl?: string | null;
   role?: string | null;
   submissions?: any[] | null;
+  profiles?: Profile[];
+
 }
