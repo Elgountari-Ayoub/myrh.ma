@@ -17,8 +17,10 @@ import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-s
 import { AuthGuard } from './auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TestComponent } from './components/test/test.component';
+import { JobSeekerProfilesComponent } from './components/user/job-seeker-profiles/job-seeker-profiles.component';
 
 const routes: Routes = [
+  { path: 'jobSeekerProfiles', component: JobSeekerProfilesComponent },
   { path: 'test', component: TestComponent },
 
   { path: 'signup', component: SignupComponent },
@@ -36,15 +38,42 @@ const routes: Routes = [
       { path: 'recruiter-statistics', component: RecruiterStatisticsComponent },
       { path: '', redirectTo: 'recruiter-job-offers', pathMatch: 'full' }, // Default child route
     ],
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
-  { path: 'agent-dash', component: DashboardAgentComponent, canActivate: [AuthGuard]},
-  { path: 'user-dash', component: UserComponent, canActivate: [AuthGuard]},
-  { path: 'register', component: RecruiterCreateComponent, canActivate: [AuthGuard]},
-  { path: 'validation', component: ValidationComponent, canActivate: [AuthGuard]},
-  { path: 'jobOffer', component: JobOfferIndexComponent},
-  { path: 'jobOffer-create', component: JobOfferCreateComponent, canActivate: [AuthGuard]},
-  
+  {
+    path: 'agent-dash',
+    component: DashboardAgentComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-dash',
+    component: UserComponent,
+
+    children: [
+      { path: 'jobSeekerProfiles', component: JobSeekerProfilesComponent },
+
+      // { path: '', component: RecruiterStatisticsComponent },
+      // { path: '', redirectTo: 'recruiter-job-offers', pathMatch: 'full' }, // Default child route
+    ],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'register',
+    component: RecruiterCreateComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'validation',
+    component: ValidationComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'jobOffer', component: JobOfferIndexComponent },
+  {
+    path: 'jobOffer-create',
+    component: JobOfferCreateComponent,
+    canActivate: [AuthGuard],
+  },
+
   { path: '404', component: NotFoundComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', redirectTo: '/404' },

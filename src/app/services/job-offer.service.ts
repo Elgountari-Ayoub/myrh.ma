@@ -24,6 +24,8 @@ export class JobOfferService {
   }
 
   getAllJobOffersByStatus(status: string): Observable<JobOffer[]> {
+    console.log(this.headers);
+    
     return this.http.get<JobOffer[]>(`${this.baseUrl}` + '/status=' + status, {
       headers: this.headers,
     });

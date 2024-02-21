@@ -7,6 +7,7 @@ import { WebSocketService } from 'src/app/services/web-socket.service';
 import { ClientDTO } from 'src/app/models/ClientDTO';
 import { Auth } from 'src/app/models/Auth';
 import { MyHttpService } from 'src/app/services/my-http.service';
+import { JobSeekerService } from 'src/app/services/job-seeker.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private webSocketService: WebSocketService,
+    private jobSeekerService: JobSeekerService,
     private http: MyHttpService
   ) {
     this.signInForm = this.formBuilder.group({
@@ -62,7 +64,22 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/dashboard']);
               break;
             case 'JOBSEEKER':
-              this.router.navigate(['/user-dash']);
+              this.jobSeekerService.getById(this.authService.getAuthUser()?.id ?? 0).subscribe({
+                next: (jobSeeker) => {
+                  alert("hiii ya abdellah")
+                  console.log(jobSeeker);
+                  alert(jobSeeker.profiles?.length);
+                  if (jobSeeker.profiles?.length == 0) {
+                    this.router.navigate(['/test']);
+                    return;
+                  }
+                  this.router.navigate(['/user-dash']);
+                },
+                error: (error) => {
+                  console.log("error ------- ", error);
+
+                }
+              })
               break;
             default: // Guest
               this.router.navigate(['/']);

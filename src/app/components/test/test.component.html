@@ -1,5 +1,11 @@
 <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <a
+    href="#"
+    class="bg-blue-600 p-2 text-white rounded m-4 block ml-auto text-center w-fit"
+    >Go Home</a
+  >
     <div *ngIf="profiles" class="mb-4">
+
         <label for="profileSelect" class="block text-gray-700 font-bold mb-2">Select a profile</label>
         <select id="profileSelect" name="profileSelect" (change)="loadSelectedProfileQuestion($event)"
             class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">

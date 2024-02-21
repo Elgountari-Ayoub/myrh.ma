@@ -66,8 +66,10 @@ export class HomeComponent implements OnInit {
                       next: (jobSeeker) => {
                         alert("hiii ya abdellah")
                         console.log(jobSeeker);
+                        alert(jobSeeker.profiles?.length);
                         if (jobSeeker.profiles?.length == 0) {
                           this.router.navigate(['/test']);
+                          return;
                         }
                         this.router.navigate(['/user-dash']);
                       },
