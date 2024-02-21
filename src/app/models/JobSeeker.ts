@@ -5,6 +5,6 @@ import { Question } from "./Question";
 export interface JobSeeker extends Auth{
     id?: number;
     title?: string;
-    profile?: Profile[];
+    profiles?: Profile[];
   }
   

@@ -26,4 +26,10 @@ export class JobSeekerService {
       { headers: this.headers }
     );
   }
+
+  getById(id: number): Observable<JobSeeker> { 
+    this.headers = this.authService.getHeaders();
+    
+    return this.http.get<JobSeeker>(`${this.baseUrl}/${id}`, { headers: this.headers }) 
+  }
 }

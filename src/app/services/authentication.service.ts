@@ -18,7 +18,7 @@ export class AuthenticationService {
   private headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-    const token = this.getAuthToken();
+    const token = localStorage.getItem('token');
     this.headers = this.headers.set('Authorization', `Bearer ${token ? token : ''}`);
     this.headers = this.headers.append('Content-Type', 'application/json');
 

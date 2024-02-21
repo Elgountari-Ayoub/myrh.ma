@@ -4,6 +4,7 @@ import { Auth } from 'src/app/models/Auth';
 import { ClientDTO } from 'src/app/models/ClientDTO';
 import { Recruiter } from 'src/app/models/Recruiter';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { JobSeekerService } from 'src/app/services/job-seeker.service';
 import { MyHttpService } from 'src/app/services/my-http.service';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import Swal from 'sweetalert2';
@@ -21,7 +22,9 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: MyHttpService,
-    private webSocketService: WebSocketService
+    private webSocketService: WebSocketService,
+    private jobSeekerService: JobSeekerService,
+
   ) { }
   ngOnInit(): void {
     this.authUser = <Auth>this.authService.getAuthUser();
@@ -50,6 +53,7 @@ export class HomeComponent implements OnInit {
                     console.error('Error adding user:', error);
                   }
                 );
+                // return;
                 switch (auth?.role) {
                   case 'AGENT':
                     this.router.navigate(['/agent-dash']);
@@ -58,7 +62,20 @@ export class HomeComponent implements OnInit {
                     this.router.navigate(['/dashboard']);
                     break;
                   case 'JOBSEEKER':
-                    this.router.navigate(['/user-dash']);
+                    this.jobSeekerService.getById(this.authService.getAuthUser()?.id ?? 0).subscribe({
+                      next: (jobSeeker) => {
+                        alert("hiii ya abdellah")
+                        console.log(jobSeeker);
+                        if (jobSeeker.profiles?.length == 0) {
+                          this.router.navigate(['/test']);
+                        }
+                        this.router.navigate(['/user-dash']);
+                      },
+                      error: (error) => {
+                        console.log("error ------- ", error);
+
+                      }
+                    })
                     break;
                   default: // Guest
                     this.router.navigate(['/']);

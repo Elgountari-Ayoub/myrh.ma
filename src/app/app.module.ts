@@ -25,6 +25,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { TestComponent } from './components/test/test.component';
 import { CongratulationsComponent } from './components/congratulations/congratulations.component';
 import { TryLaterComponent } from './components/try-later/try-later.component';
+import { MyProfilesComponent } from './components/my-profiles/my-profiles.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TryLaterComponent } from './components/try-later/try-later.component';
     QuestionComponent,
     TestComponent,
     CongratulationsComponent,
-    TryLaterComponent
+    TryLaterComponent,
+    MyProfilesComponent
   ],
   imports: [
     BrowserModule,
