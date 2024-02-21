@@ -23,6 +23,8 @@ import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-s
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { QuestionComponent } from './components/question/question.component';
 import { TestComponent } from './components/test/test.component';
+import { CongratulationsComponent } from './components/congratulations/congratulations.component';
+import { TryLaterComponent } from './components/try-later/try-later.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { TestComponent } from './components/test/test.component';
     RecruiterStatisticsComponent,
     NotFoundComponent,
     QuestionComponent,
-    TestComponent
+    TestComponent,
+    CongratulationsComponent,
+    TryLaterComponent
   ],
   imports: [
     BrowserModule,

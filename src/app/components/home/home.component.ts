@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
                     console.error('Error adding user:', error);
                   }
                 );
-              
                 switch (auth?.role) {
                   case 'AGENT':
                     this.router.navigate(['/agent-dash']);

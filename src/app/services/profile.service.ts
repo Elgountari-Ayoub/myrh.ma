@@ -18,6 +18,10 @@ export class ProfileService {
     this.headers = this.authService.getHeaders();
   }
 
+  getById(id: number): Observable<Profile> { 
+    return this.http.get<Profile>(`${this.baseUrl}/${id}`, { headers: this.headers }) 
+  }
+
   getAll(): Observable<any[]> { 
     return this.http.get<any[]>(`${this.baseUrl}`, { headers: this.headers }) 
   }

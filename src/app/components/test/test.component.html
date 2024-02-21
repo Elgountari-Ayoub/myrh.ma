@@ -1,7 +1,58 @@
-<div *ngIf="questions && currentIndex < questions.length">
-    <app-question [question]="questions[currentIndex]"></app-question>
-    <button (click)="nextQuestion()">Next</button>
-</div>
-<div *ngIf="currentIndex >= questions.length">
-    <h2>Test completed!</h2>
+<div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div *ngIf="profiles" class="mb-4">
+        <label for="profileSelect" class="block text-gray-700 font-bold mb-2">Select a profile</label>
+        <select id="profileSelect" name="profileSelect" (change)="loadSelectedProfileQuestion($event)"
+            class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+            <option [value]=-1>
+                Select a profile
+            </option>
+            <option *ngFor="let profile of profiles" [value]="profile.id">
+                {{ profile.title }}
+            </option>
+        </select>
+    </div>
+
+    <!-- --------------------------------------------------------------------------------------------- -->
+
+    <div *ngIf="selectedProfile && selectedProfile.questions && currentIndex < (selectedProfile.questions?.length ?? 0)"
+        class="mb-4">
+        <div class="my-2">
+            <h3>{{ selectedProfile.questions[currentIndex].content }}</h3>
+            <label>
+                <input type="radio" name="answer" [value]="true" [(ngModel)]="jobSeekerAnswer"> True
+            </label>
+            <label>
+                <input type="radio" name="answer" [value]="false" [(ngModel)]="jobSeekerAnswer"> False
+            </label>
+        </div>
+        <div class="flex justify-between">
+            <button (click)="nextQuestion()"
+            class="px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600">Next</button>
+        <span class="p-2 text-blue-500">({{total}}/10) point</span>
+        </div>
+    </div>
+
+    <div *ngIf="selectedProfile && selectedProfile.questions && (currentIndex >= (selectedProfile.questions.length || 0))"
+        class="mb-4">
+        <h2 class="text-2xl font-bold text-gray-800">Test completed!</h2>
+    </div>
+
+    <!-- <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center text-green-600 mt-10">Congratulations!</h1>
+        <p class="text-lg text-center text-gray-800 mt-4">You have successfully passed the test.</p>
+        <div class="flex justify-center mt-8">
+          <a routerLink="/" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Go Home</a>
+        </div>
+      </div>
+
+
+      <div class="container mx-auto">
+        <h1 class="text-3xl font-bold text-center text-red-600 mt-10">Try Later</h1>
+        <p class="text-lg text-center text-gray-800 mt-4">You didn't pass the test this time. You can try again later.</p>
+        <div class="flex justify-center mt-8">
+          <a routerLink="/" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Go Home</a>
+        </div>
+      </div> -->
+      
+      
 </div>
