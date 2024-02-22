@@ -66,9 +66,6 @@ export class LoginComponent implements OnInit {
             case 'JOBSEEKER':
               this.jobSeekerService.getById(this.authService.getAuthUser()?.id ?? 0).subscribe({
                 next: (jobSeeker) => {
-                  alert("hiii ya abdellah")
-                  console.log(jobSeeker);
-                  alert(jobSeeker.profiles?.length);
                   if (jobSeeker.profiles?.length == 0) {
                     this.router.navigate(['/test']);
                     return;

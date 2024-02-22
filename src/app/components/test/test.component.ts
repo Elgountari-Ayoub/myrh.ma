@@ -103,6 +103,7 @@ export class TestComponent implements OnInit {
           icon: 'error',
           title: 'Try later',
           text: "There is no failure, just learning",
+          footer: "You get" + this.total/10
         });
       }
       this.router.navigate(['/']);

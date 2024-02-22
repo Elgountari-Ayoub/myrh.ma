@@ -1,1 +1,23 @@
-<p>job-seeker-profiles works!</p>
+<a
+  href="/test"
+  class="bg-blue-600 p-2 text-white rounded m-4 block mr-auto text-center w-fit"
+  >Get a profile</a
+>
+
+<div *ngIf="(jobSeeker?.profiles?.length ?? 0) > 0; else noProfile">
+  <div class="flex justify-between">
+    <div
+      *ngFor="let profile of jobSeeker?.profiles"
+      class="w-3/12 h-64 bg-cyan-400 flex items-center justify-center rounded"
+    >
+      <p class="text-xl text-white">{{ profile.title }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->
+<ng-template #noProfile>
+  <div class="p-2 m-4 text-center inline-block w-full font-bold">
+    No profile yet
+  </div>
+</ng-template>

@@ -14,14 +14,19 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RecruiterCreateComponent } from './components/recruiter/recruiter-create/recruiter-create.component';
 import { UserComponent } from './components/user/user.component';
 import { RecruiterStatisticsComponent } from './components/dashboard/recruiter-statistics/recruiter-statistics.component';
-import { AuthGuard } from './auth.guard';
+import { authGuard } from './auth.guard';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TestComponent } from './components/test/test.component';
 import { JobSeekerProfilesComponent } from './components/user/job-seeker-profiles/job-seeker-profiles.component';
+import { SubmissionsComponent } from './components/user/submissions/submissions.component';
 
 const routes: Routes = [
-  { path: 'jobSeekerProfiles', component: JobSeekerProfilesComponent },
-  { path: 'test', component: TestComponent },
+  {
+    path: 'jobSeekerProfiles',
+    component: JobSeekerProfilesComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'test', component: TestComponent, canActivate: [authGuard] },
 
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
@@ -38,40 +43,41 @@ const routes: Routes = [
       { path: 'recruiter-statistics', component: RecruiterStatisticsComponent },
       { path: '', redirectTo: 'recruiter-job-offers', pathMatch: 'full' }, // Default child route
     ],
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'agent-dash',
     component: DashboardAgentComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'user-dash',
     component: UserComponent,
 
     children: [
+      { path: 'submissions', component: SubmissionsComponent },
       { path: 'jobSeekerProfiles', component: JobSeekerProfilesComponent },
 
       // { path: '', component: RecruiterStatisticsComponent },
-      // { path: '', redirectTo: 'recruiter-job-offers', pathMatch: 'full' }, // Default child route
+      { path: '', redirectTo: 'submissions', pathMatch: 'full' }, // Default child route
     ],
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'register',
     component: RecruiterCreateComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'validation',
     component: ValidationComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   { path: 'jobOffer', component: JobOfferIndexComponent },
   {
     path: 'jobOffer-create',
     component: JobOfferCreateComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
 
   { path: '404', component: NotFoundComponent },

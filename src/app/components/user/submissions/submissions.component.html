@@ -1,0 +1,51 @@
+<div class="max-w-screen-xl px-4 mx-auto">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">title</th>
+          <th scope="col" class="px-6 py-3">city</th>
+          <th scope="col" class="px-6 py-3">description</th>
+          <th scope="col" class="px-6 py-3">educationalLevel</th>
+          <th scope="col" class="px-6 py-3">profile</th>
+          <th scope="col" class="px-6 py-3">salary[MAD]</th>
+          <th scope="col" class="px-6 py-3">status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+          *ngFor="let resume of resumes"
+        >
+          <th scope="row" class="px-6 py-4">
+            {{ resume.jobOffer?.title }}
+          </th>
+          <td class="px-6 py-4">
+            {{ resume.jobOffer?.city }}
+          </td>
+          <td class="px-6 py-4">
+            {{ resume.jobOffer?.description }}
+          </td>
+          <td class="px-6 py-4">
+            {{ resume.jobOffer?.educationalLevel }}
+          </td>
+          <td class="px-6 py-4">
+            {{ resume.jobOffer?.profile }}
+          </td>
+          <td class="px-6 py-4">
+            {{ resume.jobOffer?.salary }}
+          </td>
+
+          <td class="px-6 py-4" *ngIf="resume.status">
+            {{ resume.status }}
+          </td>
+          <td class="px-6 py-4" *ngIf="!resume.status">Pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

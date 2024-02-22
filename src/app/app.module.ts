@@ -27,6 +27,7 @@ import { CongratulationsComponent } from './components/congratulations/congratul
 import { TryLaterComponent } from './components/try-later/try-later.component';
 import { MyProfilesComponent } from './components/my-profiles/my-profiles.component';
 import { JobSeekerProfilesComponent } from './components/user/job-seeker-profiles/job-seeker-profiles.component';
+import { SubmissionsComponent } from './components/user/submissions/submissions.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { JobSeekerProfilesComponent } from './components/user/job-seeker-profile
     CongratulationsComponent,
     TryLaterComponent,
     MyProfilesComponent,
-    JobSeekerProfilesComponent
+    JobSeekerProfilesComponent,
+    SubmissionsComponent
   ],
   imports: [
     BrowserModule,

@@ -52,14 +52,11 @@ export class JobOfferIndexComponent implements OnInit {
       let userId = -1;
       if (this.authUser?.id) {
         userId = this.authUser?.id;
-        // alert("userId " + userId)
       }
 
       const formData = new FormData();
       formData.append('userId', `${userId}`);
       formData.append('resume', this.resume, this.resume.name);
-
-      // alert("authId " + userId)
 
       this.resumeService.create(formData, id!).subscribe({
         next: (resume) => this.router.navigate(['/jobOffer']),
